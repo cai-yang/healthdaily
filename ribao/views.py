@@ -82,7 +82,7 @@ def dailyhomepage(request,page='1'):
     #        flag=0
     d = Daily.objects.get(id=page)
     ARTICLE_LIST=Article.objects.filter(daily=d)
-    for num in range(d.id-3,d.id+2):
+    for num in range(d.id+2,d.id-1,-1):
         try:
             DAILY_LIST.append(Daily.objects.get(id=num))
         except:
