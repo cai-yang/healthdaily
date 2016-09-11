@@ -79,8 +79,12 @@
 
                             <!--navigation-->
                             <ul class="pager">
-                                <li class="previous"><a href=""="{{PREVIOUS_URL}}">&lt; Prev</a></li>
-                                <li class="next disabled"><a href="{{NEXT_URL}}">Next &gt;</a></li>
+                              {{if page==1}}
+                                <li class="previous disabled"><a href="">&lt; Prev</a></li>
+                              {{else}}
+                                <li class="previous"><a href="{{PREVIOUS_URL}}">&lt; Prev</a></li>
+                              {{endif}}
+                                <li class="next"><a href="{{NEXT_URL}}">Next &gt;</a></li>
                             </ul>
                             <hr>
 
