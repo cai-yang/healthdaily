@@ -82,11 +82,11 @@ def dailyhomepage(request,page='1'):
     #        flag=0
     d = Daily.objects.get(id=page)
     ARTICLE_LIST=Article.objects.filter(daily=d)
-    for num in range(d.id,d.id+5):
+    for num in range(d.id-3,d.id+2):
         try:
             DAILY_LIST.append(Daily.objects.get(id=num))
         except:
-            break
+            pass
     return render_to_response('dailyhomepage.html',{ 'PREVIOUS_URL':PREVIOUS_URL, 'NEXT_URL':NEXT_URL, 'page':page, 'DAILY_LIST':DAILY_LIST, 'ARTICLE_LIST':ARTICLE_LIST})
     ARTICLE_LIST[index] = Article.objects.filter(daily=Daily.objects.get(id=d_num))
         #for a_num in ARTICLE_NUM_LIST[index]:
