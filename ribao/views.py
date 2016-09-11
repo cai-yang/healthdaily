@@ -60,7 +60,7 @@ def homepage(request):
 
 
 def article(request,num='1'):
-    a = Article.objects.get(pk=num)
+    a = Article.objects.get(id=num)
     return render_to_response('daily.html',{'a':a})
 
 def dailyhomepage(request,page='1'):
@@ -76,7 +76,7 @@ def dailyhomepage(request,page='1'):
     #    if page==1:
     #        index = d_num - 1
     #    try:
-    #        DAILY_LIST.append(Daily.objects.get(pk=d_num))
+    #        DAILY_LIST.append(Daily.objects.get(id=d_num))
     #        ARTICLE_LIST.append([])
     #    except:
     #        flag=0
@@ -88,14 +88,14 @@ def dailyhomepage(request,page='1'):
         except:
             break
     return render_to_response('dailyhomepage.html',{ 'PREVIOUS_URL':PREVIOUS_URL, 'NEXT_URL':NEXT_URL, 'page':page, 'DAILY_LIST':DAILY_LIST, 'ARTICLE_LIST':ARTICLE_LIST})
-    ARTICLE_LIST[index] = Article.objects.filter(daily=Daily.objects.get(pk=d_num))
+    ARTICLE_LIST[index] = Article.objects.filter(daily=Daily.objects.get(id=d_num))
         #for a_num in ARTICLE_NUM_LIST[index]:
-        #    ARTICLE_LIST[index].append(Article.objects.get(pk=a_num))
+        #    ARTICLE_LIST[index].append(Article.objects.get(id=a_num))
 
     return render_to_response('dhome.html',{'flag':flag, 'd_num':d_num,'PREVIOUS_URL':PREVIOUS_URL, 'NEXT_URL':NEXT_URL, 'page':page, 'DAILY_LIST':DAILY_LIST, 'ARTICLE_LIST':ARTICLE_LIST})
 
 def daily(request,num='1'):
-    d = Daily.objects.get(pk=num)
+    d = Daily.objects.get(id=num)
     #ARTICLE_NUM_LIST = [d.article_num1,d.article_num2,d.article_num3,d.article_num4,d.article_num5]
     ARTICLE_LIST = Article.objects.filter(daily=d)
     return render_to_response('projexam.html',{'d':d, 'ARTICLE_LIST':ARTICLE_LIST})
