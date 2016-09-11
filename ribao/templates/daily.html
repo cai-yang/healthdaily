@@ -51,7 +51,6 @@
                     <div>
                         <section>
 
-                            {%for a in ARTICLE_LIST%}
                             <!--article image-->
                             <!--<img src="/static/img/blog/banner-article-1.jpg" alt="" class="img-responsive">-->
 
@@ -62,17 +61,16 @@
                             <!--article date-->
                             <p class="article-date">{{a.date_add}}</p>
 
-                            <!--article tags-->
+                           <!--article tags-->
                             <p class="article-tags">
-                                {%for category in CATIGORY_LIST%}
-                                <a href="#">{{category.name}}</a> ,
-                                {%endfor%}
+                                <a href="{{a.raw_url}}">阅读原链</a> ,
+
                             </p>
 
                             <!--article content-->
                             <p class="article-description">{{a.comment}}</p>
 
-                            {%endfor%}
+
 
                             <!--navigation-->
                             <ul class="pager">
