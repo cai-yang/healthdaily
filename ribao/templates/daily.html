@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <title>Daily - Daniel Yang</title>
+    <link rel="icon" type="image/png" href="/static/img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Bootstrap -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/static/css/style.css" rel="stylesheet" media="screen">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="/static/js/bootstrap/respond.min.js"></script>
+      <script src="/static/js/bootstrap/html5shiv.js"></script>
+    <![endif]-->
+
+    </head>
+    <body class="page-blog">
+        <div class="container" id="container">
+
+            <div class="row top">
+                <div class="col-lg-8 col-md-8 col-sm-7 col-left">
+                    <div class="name"><a href="index.html">Daniel Yang</a></div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-5 col-right">
+                    <nav>
+                        <ul class="list-inline" id="menu">
+                          <li class="active">
+                              <a href="/index/">home</a>
+                          </li>
+                          <li>
+                              <a href="/a/1/">Article</a>
+                          </li>
+                          <li>
+                              <a href="/d/1/">Daily</a>
+                          </li>
+                          <li>
+                              <a href="/contact.html">contact</a>
+                          </li>
+                            <li class="last">
+                                <a href="#"><img class="social" src="/static/img/icon/icon-facebook.png" alt="facebook"></a>
+                                <a href="#"><img class="social" src="/static/img/icon/icon-twitter.png" alt="twitter"></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="row bottom">
+                <div class="col-lg-8 col-md-8 col-sm-7 col-left">
+                    <div>
+                        <section>
+  
+                            {%for a in ARTICLE_LIST%}
+                            <!--article image-->
+                            <!--<img src="/static/img/blog/banner-article-1.jpg" alt="" class="img-responsive">-->
+
+                            <!--article title-->
+                            <h1>{{a.title}}</h1>
+                            <h1 class="spacer">___</h1>
+
+                            <!--article date-->
+                            <p class="article-date">{{a.date_add}}</p>
+
+                            <!--article tags-->
+                            <p class="article-tags">
+                                {%for category in CATIGORY_LIST%}
+                                <a href="#">{{category.name}}</a> ,
+                                {%endfor%}
+                            </p>
+
+                            <!--article content-->
+                            <p class="article-description">{{a.comment}}</p>
+
+                            {%endfor%}
+
+                            <!--navigation-->
+                            <ul class="pager">
+                                <li class="previous"><a href="#">&lt; Prev</a></li>
+                                <li class="next disabled"><a href="#">Next &gt;</a></li>
+                            </ul>
+                            <hr>
+
+
+
+                            <!--share-->
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    <h3 class="share">Share</h3>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-right">
+                                    <a href="#"><img class="social" src="/static/img/icon/icon-mail.png" alt="Mail"></a>
+                                    <a href="#"><img class="social" src="/static/img/icon/icon-facebook.png" alt="Facebook"></a>
+                                    <a href="#"><img class="social" src="/static/img/icon/icon-twitter.png" alt="Twitter"></a>
+                                    <a href="#"><img class="social" src="/static/img/icon/icon-google.png" alt="Google plus"></a>
+                                </div>
+                            </div>
+
+                        </section>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-5 col-right">
+                    <div id="scroll-shadow"></div>
+                    <h1 class="visible-xs section-header" id="posts-list">Last articles</h1>
+                    <h1 class="visible-xs text-center spacer">___</h1>
+
+                    <section class="blog">
+
+                        <!--article-->
+                        <div class="media">
+                            <a class="pull-left" href="#">
+
+                                <!--article image-->
+                                <img class="media-object" src="/static/img/blog/article-min-1.png" alt="miniature-article">
+
+                            </a>
+                            <div class="media-body">
+
+                                <!--article title-->
+                                <h4 class="media-heading">10 Podcasts About Web Design
+                                <span class="label label-default">New</span></h4>
+
+                                <!--article category-->
+                                <p class="article-category">Graphic design</p>
+
+                                <!--article date-->
+                                <p class="article-date">09 sep 2013</p>
+
+                                <!--article short description-->
+                                <p class="article-description">Comitem generum supergressa idem reginae flagrans formula fines fines pretioso occideretur cuiusdam eius...view more</p>
+
+                            </div>
+                        </div>
+
+                    </section>
+                    <!--<a class="btn btn-default btn-lg btn-block load-more">Load more</a>
+                    <a class="btn btn-block scroll-top visible-xs">
+                        <img src="/static/img/icon/icon-chevron.png" alt="Scroll top">
+                    </a>-->
+                </div>
+            </div>
+        </div>
+
+        <script src="/static/js/jquery.js"></script>
+
+        <!-- FASTCLICK -->
+        <script src="/static/js/plugins/fastclick/fastclick.js"></script>
+        <!-- SMOOTH SCROLL -->
+        <script src="/static/js/plugins/smooth-scroll/jquery.smooth-scroll.min.js"></script>
+        <!-- MIXITUP -->
+        <script src="/static/js/plugins/mixitup/jquery.mixitup.min.js"></script>
+
+        <script src="/static/js/main.js"></script>
+    </body>
+</html>
