@@ -258,7 +258,7 @@ class APIClient(object):
         redirect = redirect_uri if redirect_uri else self.redirect_uri
         if not redirect:
             raise APIError('21305', 'Parameter absent: redirect_uri', 'OAuth2 request')
-        r = _http_post('%s%s?client_id=%s&client_secret=%s&redirect_uri=%s&code=%s&grant_type=authorization_code' % (self.auth_url, 'access_token',self.client_id,self.client_secret,redirect,code), \
+        r = _http_post('%s%s?client_id=%s&client_secret=%s&redirect_uri=%s&grant_type=authorization_code&code=%s' % (self.auth_url, 'access_token',self.client_id,self.client_secret,redirect,code), \
                 #client_id = self.client_id, \
                 #client_secret = self.client_secret, \
                 #redirect_uri = redirect, \
