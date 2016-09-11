@@ -32,6 +32,6 @@ urlpatterns = [
     url(r'^adda', views.adda),
     url(r'^x/(\d+)', views.dailyhomepage),
     url(r'^d/(\d+)', views.daily),
-    url(r'^api/',include(router.urls)),
+    url(r'^api',include(router.urls)),
     url(r'^',views.homepage),
 ]
