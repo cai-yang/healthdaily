@@ -25,7 +25,7 @@ ACCESS_TOKEN=''
 
 # Create your views here.
 def callback(request):
-    code = request.REQUEST.get('code').encode('utf-8')
+    code = request.GET('code').encode('utf-8')
     client = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri= 'http://healthdaily.applinzi.com/callback')
     r = client.request_access_token(code,'http://healthdaily.applinzi.com/callback')
     ACCESS_TOKEN = r.access_token #
