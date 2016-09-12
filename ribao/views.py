@@ -27,7 +27,7 @@ ACCESS_TOKEN=''
 def callback(request):
     code = request.GET['code'].encode('utf-8')
     client = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri= CALLBACK_URL)
-    r = client.request_access_token(code,CALLBACK_URL)
+    r = client.request_access_token(code)
     ACCESS_TOKEN = r.access_token #
     expires_in = r.expires_in #
     client.set_access_token(ACCESS_TOKEN, expires_in)
