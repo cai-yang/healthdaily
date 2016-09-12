@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__version__ = '1.1.4'
+__version__ = '1.1.3'
 __author__ = 'Liao Xuefeng (askxuefeng@gmail.com)'
 
 '''
@@ -9,11 +9,16 @@ Python client SDK for sina weibo API using OAuth 2.
 '''
 
 try:
+    import json
+except ImportError:
+    import simplejson as json
+
+try:
     from cStringIO import StringIO
 except ImportError:
     from StringIO import StringIO
 
-import gzip, time, json, hmac, base64, hashlib, urllib, urllib2, logging, mimetypes, collections
+import gzip, time, hmac, base64, hashlib, urllib, urllib2, logging, mimetypes, collections
 
 class APIError(StandardError):
     '''
@@ -54,6 +59,7 @@ class JsonDict(dict):
 def _encode_params(**kw):
     '''
     do url-encode parameters
+
     >>> _encode_params(a=1, b='R&D')
     'a=1&b=R%26D'
     >>> _encode_params(a=u'\u4e2d\u6587', b=['A', 'B', 123])
@@ -120,6 +126,7 @@ def _read_body(obj):
     using_gzip = obj.headers.get('Content-Encoding', '')=='gzip'
     body = obj.read()
     if using_gzip:
+        logging.info('gzip content received.')
         gzipper = gzip.GzipFile(fileobj=StringIO(body))
         fcontent = gzipper.read()
         gzipper.close()
@@ -150,7 +157,7 @@ def _http_call(the_url, method, authorization, **kw):
     if boundary:
         req.add_header('Content-Type', 'multipart/form-data; boundary=%s' % boundary)
     try:
-        resp = urllib2.urlopen(req, timeout=5)
+        resp = urllib2.urlopen(req)
         body = _read_body(resp)
         r = _parse_json(body)
         if hasattr(r, 'error_code'):
@@ -198,6 +205,7 @@ class APIClient(object):
     def parse_signed_request(self, signed_request):
         '''
         parse signed request when using in-site app.
+
         Returns:
             dict object like { 'uid': 12345, 'access_token': 'ABC123XYZ', 'expires': unix-timestamp },
             or None if parse failed.
@@ -241,10 +249,18 @@ class APIClient(object):
                         response_type = response_type, \
                         redirect_uri = redirect, **kw))
 
-    def _parse_access_token(self, r):
+    def request_access_token(self, code, redirect_uri=None):
         '''
-        new:return access token as a JsonDict: {"access_token":"your-access-token","expires_in":12345678,"uid":1234}, expires_in is represented using standard unix-epoch-time
+        return access token as a JsonDict: {"access_token":"your-access-token","expires_in":12345678,"uid":1234}, expires_in is represented using standard unix-epoch-time
         '''
+        redirect = redirect_uri if redirect_uri else self.redirect_uri
+        if not redirect:
+            raise APIError('21305', 'Parameter absent: redirect_uri', 'OAuth2 request')
+        r = _http_post('%s%s' % (self.auth_url, 'access_token'), \
+                client_id = self.client_id, \
+                client_secret = self.client_secret, \
+                redirect_uri = redirect, \
+                code = code, grant_type = 'authorization_code')
         current = int(time.time())
         expires = r.expires_in + current
         remind_in = r.get('remind_in', None)
@@ -254,18 +270,6 @@ class APIClient(object):
                 expires = rtime
         return JsonDict(access_token=r.access_token, expires=expires, expires_in=expires, uid=r.get('uid', None))
 
-    def request_access_token(self, code, redirect_uri=None):
-        redirect = redirect_uri if redirect_uri else self.redirect_uri
-        if not redirect:
-            raise APIError('21305', 'Parameter absent: redirect_uri', 'OAuth2 request')
-        r = _http_post('%s%s?client_id=%s&client_secret=%s&redirect_uri=%s&grant_type=authorization_code&code=%s' % (self.auth_url, 'access_token',self.client_id,self.client_secret,redirect,code), \
-                #client_id = self.client_id, \
-                #client_secret = self.client_secret, \
-                #redirect_uri = redirect, \
-                #code = code, grant_type = 'authorization_code')
-                )
-        return self._parse_access_token(r)
-
     def refresh_token(self, refresh_token):
         req_str = '%s%s' % (self.auth_url, 'access_token')
         r = _http_post(req_str, \
@@ -273,7 +277,14 @@ class APIClient(object):
             client_secret = self.client_secret, \
             refresh_token = refresh_token, \
             grant_type = 'refresh_token')
-        return self._parse_access_token(r)
+        current = int(time.time())
+        expires = r.expires_in + current
+        remind_in = r.get('remind_in', None)
+        if remind_in:
+            rtime = int(remind_in) + current
+            if rtime < expires:
+                expires = rtime
+        return JsonDict(access_token=r.access_token, expires=expires, expires_in=expires, uid=r.get('uid', None))
 
     def is_expires(self):
         return not self.access_token or time.time() > self.expires
