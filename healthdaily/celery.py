@@ -10,7 +10,8 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'healthdaily.settings')
 from django.conf import settings  # noqa
 
 app = Celery('healthdaily',
-            broker='redis://:Cyaiqki7UpqV2xWBgNb8VcpQtM99tuwnOKoGvYIkVfwGRh8owpMBtys8ob2apmam@boqyovqrmlxy.redis.sae.sina.com.cn:10093',
+            broker='amqp://'
+            #broker='redis://:Cyaiqki7UpqV2xWBgNb8VcpQtM99tuwnOKoGvYIkVfwGRh8owpMBtys8ob2apmam@boqyovqrmlxy.redis.sae.sina.com.cn:10093',
             # backend='amqp://',
             )
 
@@ -20,7 +21,8 @@ app.config_from_object('django.conf:settings')
 app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 app.conf.update(
     CELERY_TASK_RESULT_EXPIRES=3600,
-    CELERY_RESULT_BACKEND = 'redis://:Cyaiqki7UpqV2xWBgNb8VcpQtM99tuwnOKoGvYIkVfwGRh8owpMBtys8ob2apmam@boqyovqrmlxy.redis.sae.sina.com.cn:10093',
+    CELERY_RESULT_BACKEND = 'rpc://',
+    #CELERY_RESULT_BACKEND = 'redis://:Cyaiqki7UpqV2xWBgNb8VcpQtM99tuwnOKoGvYIkVfwGRh8owpMBtys8ob2apmam@boqyovqrmlxy.redis.sae.sina.com.cn:10093',
     CELERY_RESULT_PERSISTENT = False,
     CELERYBEAT_SCHEDULE = {
         #'add-every-2-seconds':{
