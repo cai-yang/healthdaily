@@ -24,7 +24,7 @@ router.register(r'daily',views.DailyViewSet)
 router.register(r'category',views.CategoryViewSet)
 
 urlpatterns = [
-    url(r'^callback',views.callback),
+    #url(r'^callback',views.callback),
     url(r'^sina', views.sina),
     url(r'^justiknow', include(admin.site.urls)),
     url(r'^a/(\d+)', views.article),
@@ -33,5 +33,6 @@ urlpatterns = [
     url(r'^x/(\d+)', views.dailyhomepage),
     url(r'^d/(\d+)', views.daily),
     url(r'^api/',include(router.urls)),
-    url(r'^',views.homepage),
+    #url(r'^',views.homepage),
+    url(r'^',views.callback),
 ]
