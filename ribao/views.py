@@ -18,7 +18,7 @@ from ribao.utils import *
 from weibo import APIClient
 
 APP_KEY = '2318693502' # app key
-APP_SECRET = '43db4ea1a6d277b9e65249f9ab8e11d2' # app secret
+APP_SECRET = '9d669d3afe787cfacff9e4819ee3c166' # app secret
 CALLBACK_URL = 'http://healthdaily.applinzi.com' # callback url
 ACCESS_TOKEN=''
 
