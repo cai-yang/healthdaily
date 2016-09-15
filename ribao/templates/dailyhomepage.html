@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+    <title>Daily - Daniel Yang</title>
+    <link rel="icon" type="image/png" href="/static/img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Bootstrap -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="/static/css/style.css" rel="stylesheet" media="screen">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="/static/js/bootstrap/respond.min.js"></script>
+      <script src="/static/js/bootstrap/html5shiv.js"></script>
+    <![endif]-->
+
+    </head>
+    <body class="page-blog">
+        <div class="container" id="container">
+
+            <div class="row top">
+                <div class="col-lg-8 col-md-8 col-sm-7 col-left">
+                    <div class="name"><a href="index.html">康复日报 - 第{{page}}期</a></div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-5 col-right">
+                    <nav>
+                        <ul class="list-inline" id="menu">
+                          <li class="active">
+                              <a href="/index/">home</a>
+                          </li>
+                          <li>
+                              <a href="/x/1">Daily</a>
+                          </li>
+                          <li>
+                              <a href="/b/">Blog</a>
+                          </li>
+                          <li>
+                              <a href="/c/">contact</a>
+                          </li>
+                          <li>
+                              <a href="/api/">api</a>
+                          </li>
+                            <li class="last">
+                                <a href="#"><img class="social" src="/static/img/icon/icon-facebook.png" alt="facebook"></a>
+                                <a href="#"><img class="social" src="/static/img/icon/icon-twitter.png" alt="twitter"></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="row bottom">
+                <div class="col-lg-8 col-md-8 col-sm-7 col-left">
+                    <div>
+                        <section>
+
+                            {%for a in ARTICLE_LIST%}
+                            <!--article image-->
+                            <!--<img src="/static/img/blog/banner-article-1.jpg" alt="" class="img-responsive">-->
+
+                            <!--article title-->
+                            <h1><a href="/a/{{a.id}}">{{a.title}}</h1>
+                            <h1 class="spacer">___</h1>
+
+                            <!--article date-->
+                            <p class="article-date">{{a.date_add}}</p>
+
+                            <!--article tags-->
+                            <p class="article-tags">
+                                {%for category in CATIGORY_LIST%}
+                                <a href="#">{{category.name}}</a> ,
+                                {%endfor%}
+                            </p>
+
+                            <!--article content-->
+                            <p class="article-description">{{a.comment}}</p>
+
+                            {%endfor%}
+
+                            <!--navigation-->
+                            <ul class="pager">
+                              {%if page = 1%}
+                                <li class="previous disabled"><a href="">&lt; Prev</a></li>
+                              {%else%}
+                                <li class="previous"><a href="{{PREVIOUS_URL}}">&lt; Prev</a></li>
+                              {%endif%}
+                                <li class="next"><a href="{{NEXT_URL}}">Next &gt;</a></li>
+                            </ul>
+                            <hr>
+
+
+
+                            <!--share-->
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                    <h3 class="share">Share</h3>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-right">
+                                    <a href="#"><img class="social" src="/static/img/icon/icon-mail.png" alt="Mail"></a>
+                                    <a href="#"><img class="social" src="/static/img/icon/icon-facebook.png" alt="Facebook"></a>
+                                    <a href="#"><img class="social" src="/static/img/icon/icon-twitter.png" alt="Twitter"></a>
+                                    <a href="#"><img class="social" src="/static/img/icon/icon-google.png" alt="Google plus"></a>
+                                </div>
+                            </div>
+
+                        </section>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-5 col-right">
+                    <div id="scroll-shadow"></div>
+                    <h1 class="visible-xs section-header" id="posts-list">Last Dailys</h1>
+                    <h1 class="visible-xs text-center spacer">___</h1>
+
+                    <section class="blog">
+                        {%for daily in DAILY_LIST%}
+                        <!--article-->
+                        <div class="media">
+                            <a class="pull-left" href="/x/{{daily.id}}">
+
+                                <!--article image-->
+                                <img class="media-object" src="/static/img/blog/article-min-1.png" alt="miniature-article">
+
+                            </a>
+                            <div class="media-body">
+
+                                <!--article title-->
+                                <h4 class="media-heading"><a href="/x/{{daily.id}}">第{{daily.id}}期
+                                <span class="label label-default">New</span></h4>
+
+                                <!--article category-->
+                                <p class="article-category"></p>
+
+                                <!--article date-->
+                                <p class="article-date">{{daily.date_add}}</p>
+
+                                <!--article short description-->
+                                <p class="article-description">Comitem generum supergressa idem reginae flagrans formula fines fines pretioso occideretur cuiusdam eius...view more</p>
+
+                            </div>
+                        </div>
+                      {%endfor%}
+                    </section>
+                    <!--<a class="btn btn-default btn-lg btn-block load-more">Load more</a>
+                    <a class="btn btn-block scroll-top visible-xs">
+                        <img src="/static/img/icon/icon-chevron.png" alt="Scroll top">
+                    </a>-->
+                </div>
+            </div>
+        </div>
+
+        <script src="/static/js/jquery.js"></script>
+
+        <!-- FASTCLICK -->
+        <script src="/static/js/plugins/fastclick/fastclick.js"></script>
+        <!-- SMOOTH SCROLL -->
+        <script src="/static/js/plugins/smooth-scroll/jquery.smooth-scroll.min.js"></script>
+        <!-- MIXITUP -->
+        <script src="/static/js/plugins/mixitup/jquery.mixitup.min.js"></script>
+
+        <script src="/static/js/main.js"></script>
+    </body>
+</html>
