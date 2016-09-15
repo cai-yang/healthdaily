@@ -75,7 +75,7 @@ WSGI_APPLICATION = 'healthdaily.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
+"""
 if 'SERVER_SOFTWARE' in os.environ:
     # SAE
     import sae.const
@@ -93,6 +93,7 @@ else:
     host ="127.0.0.1"
     port ="3306"
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -103,7 +104,23 @@ DATABASES = {
         'PORT': port,					  # Set to empty string for default. Not used with sqlite3.
     }
 }
+"""
+db_name ="mytestdb"
+name ="postgres"
+pwd ="7127"
+host ="127.0.0.1"
+port ="5432"
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': db_name,
+        'USER': name,
+        'PASSWORD': pwd,
+        'HOST': host,
+        'PORT': port,
+    }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/

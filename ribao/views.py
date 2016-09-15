@@ -19,7 +19,7 @@ from weibo import APIClient
 
 APP_KEY = '2318693502' # app key
 APP_SECRET = '9d669d3afe787cfacff9e4819ee3c166' # app secret
-CALLBACK_URL = 'http://healthdaily.applinzi.com' # callback url
+CALLBACK_URL = 'http://healthdaily.applinzi.com/callback' # callback url
 ACCESS_TOKEN=''
 
 
@@ -52,8 +52,6 @@ def addarticle(request):
     article_add.delay('abc',url)
     return HttpResponse(url)
 
-def sb(request):
-    return render_to_response('123123.html')
 
 def homepage(request):
     return render_to_response('index.html')
