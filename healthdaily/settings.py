@@ -75,7 +75,7 @@ WSGI_APPLICATION = 'healthdaily.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-"""
+
 if 'SERVER_SOFTWARE' in os.environ:
     # SAE
     import sae.const
@@ -121,6 +121,7 @@ DATABASES = {
         'PORT': port,
     }
 }
+"""
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
