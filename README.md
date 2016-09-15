@@ -20,7 +20,7 @@ python manage.py migrate
 
 运行任务队列
 ```
-celery -A healthdaily worker --loglevel==info
+celery -A healthdaily worker --loglevel=info
 ```
 
 运行
