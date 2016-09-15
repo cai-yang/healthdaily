@@ -75,7 +75,8 @@ WSGI_APPLICATION = 'healthdaily.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
-
+#-------this is for the sae environ-------
+"""
 if 'SERVER_SOFTWARE' in os.environ:
     # SAE
     import sae.const
@@ -105,6 +106,8 @@ DATABASES = {
     }
 }
 """
+#-------------this is for postgresql, still working on it
+"""
 db_name ="mytestdb"
 name ="postgres"
 pwd ="7127"
@@ -122,7 +125,13 @@ DATABASES = {
     }
 }
 """
-
+#for test, use sqlite3
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
