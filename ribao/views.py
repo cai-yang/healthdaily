@@ -10,11 +10,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, permissions, renderers, viewsets
 from ribao.permissions import *
-#from ribao.tasks import *
-from rq import Queue
-from worker import conn
-q=Queue('low', connection=conn)
-from ribao.utils import *
+from ribao.tasks import *
 from weibo import APIClient
 
 APP_KEY = '2318693502' # app key
@@ -47,9 +43,7 @@ def adda(request):
 
 def addarticle(request):
     url = request.GET['a']
-    q = Queue('low', connection=conn)
-    q.enqueue(article_add, '123', url)
-    article_add.delay('abc',url)
+    article_url.delay(url)
     return HttpResponse(url)
 
 
@@ -101,7 +95,7 @@ def daily(request,num='1'):
 class ArticleViewSet(viewsets.ModelViewSet):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    #permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     #def perform_create(self, serializer):
     #    serializer.save(owner=self.request.user)
 

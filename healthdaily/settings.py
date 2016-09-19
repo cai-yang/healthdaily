@@ -70,6 +70,12 @@ TEMPLATES = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+    )
+}
+
 WSGI_APPLICATION = 'healthdaily.wsgi.application'
 
 
@@ -107,10 +113,10 @@ DATABASES = {
 }
 """
 #-------------this is for postgresql, still working on it
-"""
-db_name ="mytestdb"
-name ="postgres"
-pwd ="7127"
+
+db_name ="testdb"
+name ="yc"
+pwd ="ubuntu"
 host ="127.0.0.1"
 port ="5432"
 
@@ -132,6 +138,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+"""
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 

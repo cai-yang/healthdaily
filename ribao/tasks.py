@@ -13,7 +13,7 @@ def article_url(url):
     m = re.search(r'<title>(.*)</title>', html, flags=re.I)
     title = m and m.group(1) or ''
     print title
-    article_add(title,url)
+    return article_add(title,url)
 
 @shared_task
 def article_add(title_add,url_add):
