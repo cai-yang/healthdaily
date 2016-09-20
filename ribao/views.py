@@ -97,7 +97,7 @@ def daily(request,num='1'):
 class ArticleViewSet(viewsets.ModelViewSet):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    #permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     #def perform_create(self, serializer):
     #    serializer.save(owner=self.request.user)
 

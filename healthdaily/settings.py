@@ -118,7 +118,7 @@ DATABASES = {
 
 db_name ="testdb"
 name ="yc"
-pwd ="YC54dabendan"
+pwd ="ubuntu"
 host ="127.0.0.1"
 port ="5432"
 
