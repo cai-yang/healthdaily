@@ -112,11 +112,11 @@ DATABASES = {
     }
 }
 """
-#-------------this is for postgresql, still working on it
+#-------------this is for postgresql, change the settings to your own
 
 db_name ="testdb"
 name ="yc"
-pwd ="ubuntu"
+pwd ="YC54dabendan"
 host ="127.0.0.1"
 port ="5432"
 

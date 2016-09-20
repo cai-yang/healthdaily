@@ -12,6 +12,7 @@ from rest_framework import status, permissions, renderers, viewsets
 from ribao.permissions import *
 from ribao.tasks import *
 from weibo import APIClient
+import urllib2
 
 APP_KEY = '2318693502' # app key
 APP_SECRET = '9d669d3afe787cfacff9e4819ee3c166' # app secret
@@ -20,6 +21,7 @@ ACCESS_TOKEN=''
 
 
 # Create your views here.
+
 def callback(request):
     code = request.GET['code'].encode('utf-8')
     client = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri= CALLBACK_URL)
